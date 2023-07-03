@@ -35,13 +35,6 @@ interface AggregatorV3Interface {
     );
 }
 
-// File: HeroesBattleArena_EVM.sol
-
-
-
-// File: HeroesBattleArena.sol
-
-// File: hardhat/console.sol
 
 pragma solidity >=0.4.22 <0.9.0;
 
@@ -1742,17 +1735,17 @@ contract HeroesBattleArena is
         require(!reentrancyGuardFlag, "Reentrancy Guard Activated");
         reentrancyGuardFlag = true;
         uint256 resultPrice = uint256(getLatestPrice()); 
-        uint256 maticAmount = msg.value;
+        uint256 coinAmount = msg.value;
         for (uint256 i = 0; i <= partIds.length; ++i) {
             PartWithPrice storage s = allParts[i];
             if (keccak256(abi.encodePacked(s.name)) == keccak256(abi.encodePacked(_name))) {
                 uint256 cost =  amount.mul(s.price.mul(10**8)).div(resultPrice);
                 if (msg.sender != owner()) {
                         require(cost <= msg.value,"Value sent is not correct");
-                          if (maticAmount > cost) {
+                          if (coinAmount > cost) {
                             address payable refundAccount = payable(msg.sender);
-	                        refundAccount.transfer(maticAmount.sub(cost));
-                            maticAmount = cost;
+	                        refundAccount.transfer(coinAmount.sub(cost));
+                            coinAmount = cost;
                         }
                 }
                 if (keccak256(abi.encodePacked((s.herotype))) == keccak256(abi.encodePacked(("Free")))) {
@@ -1767,7 +1760,7 @@ contract HeroesBattleArena is
                         require(earlyHeroesNumber.add(amount) <= olympHeroesSupply, "There is no supply, right now.");
                         _mint(msg.sender, i, amount, "0x0");
                         olympHeroesNumber.add(amount);
-                    } else if (keccak256(abi.encodePacked((s.herotype))) ==keccak256(abi.encodePacked(("Nord")))) {
+                    } else if (keccak256(abi.encodePacked((s.herotype))) ==keccak256(abi.encodePacked(("North")))) {
                         require(nordHeroesNumber.add(amount) <= nordHeroesSupply,"There is no supply, right now.");
                         _mint(msg.sender, i, amount, "0x0");
                         nordHeroesNumber.add(amount);
@@ -1798,7 +1791,7 @@ contract HeroesBattleArena is
     function withdrawBalance() public onlyOwner {
         payable(owner()).transfer(address(this).balance);
     }
-    function getEstimatedMaticAmountForMint(uint256 amount , uint256 partId) public view returns (uint256) {
+    function getEstimatedCoinAmountForMint(uint256 amount , uint256 partId) public view returns (uint256) {
          uint256 resultPrice = uint256(getLatestPrice()); 
          PartWithPrice storage s = allParts[partId];
         return amount.mul(s.price.mul(10**8)).div(resultPrice);
