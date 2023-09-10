@@ -2,39 +2,39 @@
 
 // File: @chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol
 
-
 pragma solidity ^0.8.0;
 
 interface AggregatorV3Interface {
-  function decimals() external view returns (uint8);
+    function decimals() external view returns (uint8);
 
-  function description() external view returns (string memory);
+    function description() external view returns (string memory);
 
-  function version() external view returns (uint256);
+    function version() external view returns (uint256);
 
-  function getRoundData(uint80 _roundId)
-    external
-    view
-    returns (
-      uint80 roundId,
-      int256 answer,
-      uint256 startedAt,
-      uint256 updatedAt,
-      uint80 answeredInRound
-    );
+    function getRoundData(
+        uint80 _roundId
+    )
+        external
+        view
+        returns (
+            uint80 roundId,
+            int256 answer,
+            uint256 startedAt,
+            uint256 updatedAt,
+            uint80 answeredInRound
+        );
 
-  function latestRoundData()
-    external
-    view
-    returns (
-      uint80 roundId,
-      int256 answer,
-      uint256 startedAt,
-      uint256 updatedAt,
-      uint80 answeredInRound
-    );
+    function latestRoundData()
+        external
+        view
+        returns (
+            uint80 roundId,
+            int256 answer,
+            uint256 startedAt,
+            uint256 updatedAt,
+            uint80 answeredInRound
+        );
 }
-
 
 pragma solidity >=0.4.22 <0.9.0;
 
@@ -248,10 +248,10 @@ library Address {
      *
      * _Available since v3.1._
      */
-    function functionCall(address target, bytes memory data)
-        internal
-        returns (bytes memory)
-    {
+    function functionCall(
+        address target,
+        bytes memory data
+    ) internal returns (bytes memory) {
         return functionCall(target, data, "Address: low-level call failed");
     }
 
@@ -324,11 +324,10 @@ library Address {
      *
      * _Available since v3.3._
      */
-    function functionStaticCall(address target, bytes memory data)
-        internal
-        view
-        returns (bytes memory)
-    {
+    function functionStaticCall(
+        address target,
+        bytes memory data
+    ) internal view returns (bytes memory) {
         return
             functionStaticCall(
                 target,
@@ -360,10 +359,10 @@ library Address {
      *
      * _Available since v3.4._
      */
-    function functionDelegateCall(address target, bytes memory data)
-        internal
-        returns (bytes memory)
-    {
+    function functionDelegateCall(
+        address target,
+        bytes memory data
+    ) internal returns (bytes memory) {
         return
             functionDelegateCall(
                 target,
@@ -469,13 +468,9 @@ abstract contract ERC165 is IERC165 {
     /**
      * @dev See {IERC165-supportsInterface}.
      */
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        virtual
-        override
-        returns (bool)
-    {
+    function supportsInterface(
+        bytes4 interfaceId
+    ) public view virtual override returns (bool) {
         return interfaceId == type(IERC165).interfaceId;
     }
 }
@@ -600,10 +595,10 @@ interface IERC1155 is IERC165 {
      *
      * - `account` cannot be the zero address.
      */
-    function balanceOf(address account, uint256 id)
-        external
-        view
-        returns (uint256);
+    function balanceOf(
+        address account,
+        uint256 id
+    ) external view returns (uint256);
 
     /**
      * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {balanceOf}.
@@ -612,10 +607,10 @@ interface IERC1155 is IERC165 {
      *
      * - `accounts` and `ids` must have the same length.
      */
-    function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
-        external
-        view
-        returns (uint256[] memory);
+    function balanceOfBatch(
+        address[] calldata accounts,
+        uint256[] calldata ids
+    ) external view returns (uint256[] memory);
 
     /**
      * @dev Grants or revokes permission to `operator` to transfer the caller's tokens, according to `approved`,
@@ -633,10 +628,10 @@ interface IERC1155 is IERC165 {
      *
      * See {setApprovalForAll}.
      */
-    function isApprovedForAll(address account, address operator)
-        external
-        view
-        returns (bool);
+    function isApprovedForAll(
+        address account,
+        address operator
+    ) external view returns (bool);
 
     /**
      * @dev Transfers `amount` tokens of token type `id` from `from` to `to`.
@@ -736,13 +731,9 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     /**
      * @dev See {IERC165-supportsInterface}.
      */
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        virtual
-        override(ERC165, IERC165)
-        returns (bool)
-    {
+    function supportsInterface(
+        bytes4 interfaceId
+    ) public view virtual override(ERC165, IERC165) returns (bool) {
         return
             interfaceId == type(IERC1155).interfaceId ||
             interfaceId == type(IERC1155MetadataURI).interfaceId ||
@@ -759,13 +750,9 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
      * Clients calling this function must replace the `\{id\}` substring with the
      * actual token type ID.
      */
-    function uri(uint256 tokenId)
-        public
-        view
-        virtual
-        override
-        returns (string memory)
-    {
+    function uri(
+        uint256 tokenId
+    ) public view virtual override returns (string memory) {
         return (
             string(abi.encodePacked(_uri, Strings.toString(tokenId), ".json"))
         );
@@ -778,13 +765,10 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
      *
      * - `account` cannot be the zero address.
      */
-    function balanceOf(address account, uint256 id)
-        public
-        view
-        virtual
-        override
-        returns (uint256)
-    {
+    function balanceOf(
+        address account,
+        uint256 id
+    ) public view virtual override returns (uint256) {
         require(
             account != address(0),
             "ERC1155: balance query for the zero address"
@@ -799,13 +783,10 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
      *
      * - `accounts` and `ids` must have the same length.
      */
-    function balanceOfBatch(address[] memory accounts, uint256[] memory ids)
-        public
-        view
-        virtual
-        override
-        returns (uint256[] memory)
-    {
+    function balanceOfBatch(
+        address[] memory accounts,
+        uint256[] memory ids
+    ) public view virtual override returns (uint256[] memory) {
         require(
             accounts.length == ids.length,
             "ERC1155: accounts and ids length mismatch"
@@ -823,24 +804,20 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     /**
      * @dev See {IERC1155-setApprovalForAll}.
      */
-    function setApprovalForAll(address operator, bool approved)
-        public
-        virtual
-        override
-    {
+    function setApprovalForAll(
+        address operator,
+        bool approved
+    ) public virtual override {
         _setApprovalForAll(_msgSender(), operator, approved);
     }
 
     /**
      * @dev See {IERC1155-isApprovedForAll}.
      */
-    function isApprovedForAll(address account, address operator)
-        public
-        view
-        virtual
-        override
-        returns (bool)
-    {
+    function isApprovedForAll(
+        address account,
+        address operator
+    ) public view virtual override returns (bool) {
         return _operatorApprovals[account][operator];
     }
 
@@ -1097,11 +1074,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
      * - `from` cannot be the zero address.
      * - `from` must have at least `amount` tokens of token type `id`.
      */
-    function _burn(
-        address from,
-        uint256 id,
-        uint256 amount
-    ) internal virtual {
+    function _burn(address from, uint256 id, uint256 amount) internal virtual {
         require(from != address(0), "ERC1155: burn from the zero address");
 
         address operator = _msgSender();
@@ -1267,11 +1240,9 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         }
     }
 
-    function _asSingletonArray(uint256 element)
-        private
-        pure
-        returns (uint256[] memory)
-    {
+    function _asSingletonArray(
+        uint256 element
+    ) private pure returns (uint256[] memory) {
         uint256[] memory array = new uint256[](1);
         array[0] = element;
 
@@ -1291,10 +1262,10 @@ interface IStdReference {
     }
 
     /// Returns the price data for the given base/quote pair. Revert if not available.
-    function getReferenceData(string memory _base, string memory _quote)
-        external
-        view
-        returns (ReferenceData memory);
+    function getReferenceData(
+        string memory _base,
+        string memory _quote
+    ) external view returns (ReferenceData memory);
 
     /// Similar to getReferenceData, but with multiple base/quote pairs at once.
     function getReferenceDataBulk(
@@ -1305,13 +1276,12 @@ interface IStdReference {
 
 pragma solidity ^0.8.7;
 
-
 abstract contract PriceConsumerV3 {
     AggregatorV3Interface internal priceFeed;
 
     constructor() {
         priceFeed = AggregatorV3Interface(
-            0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
+            0xc6b4C3364a957d808F09C439ccd28C8f36934a0E
         );
     }
 
@@ -1322,12 +1292,11 @@ abstract contract PriceConsumerV3 {
         (
             ,
             /*uint80 roundID*/
-            int256 price, /*uint startedAt*/ /*uint timeStamp*/
+            int256 price /*uint startedAt*/ /*uint timeStamp*/ /*uint80 answeredInRound*/,
             ,
             ,
 
-        ) = /*uint80 answeredInRound*/
-            priceFeed.latestRoundData();
+        ) = priceFeed.latestRoundData();
         return price;
     }
 }
@@ -1344,11 +1313,7 @@ pragma solidity ^0.8.0;
  * _Available since v3.1._
  */
 abstract contract ERC1155Burnable is ERC1155, Ownable {
-    function burn(
-        address account,
-        uint256 id,
-        uint256 value
-    ) public virtual {
+    function burn(address account, uint256 id, uint256 value) public virtual {
         require(
             account == _msgSender() ||
                 isApprovedForAll(account, _msgSender()) ||
@@ -1373,6 +1338,7 @@ abstract contract ERC1155Burnable is ERC1155, Ownable {
     }
 }
 pragma solidity ^0.8.0;
+
 // CAUTION
 // This version of SafeMath should only be used with Solidity 0.8 or later,
 // because it relies on the compiler's built in overflow checks.
@@ -1389,7 +1355,10 @@ library SafeMath {
      *
      * _Available since v3.4._
      */
-    function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+    function tryAdd(
+        uint256 a,
+        uint256 b
+    ) internal pure returns (bool, uint256) {
         unchecked {
             uint256 c = a + b;
             if (c < a) return (false, 0);
@@ -1402,7 +1371,10 @@ library SafeMath {
      *
      * _Available since v3.4._
      */
-    function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+    function trySub(
+        uint256 a,
+        uint256 b
+    ) internal pure returns (bool, uint256) {
         unchecked {
             if (b > a) return (false, 0);
             return (true, a - b);
@@ -1414,7 +1386,10 @@ library SafeMath {
      *
      * _Available since v3.4._
      */
-    function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+    function tryMul(
+        uint256 a,
+        uint256 b
+    ) internal pure returns (bool, uint256) {
         unchecked {
             // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
             // benefit is lost if 'b' is also tested.
@@ -1431,7 +1406,10 @@ library SafeMath {
      *
      * _Available since v3.4._
      */
-    function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+    function tryDiv(
+        uint256 a,
+        uint256 b
+    ) internal pure returns (bool, uint256) {
         unchecked {
             if (b == 0) return (false, 0);
             return (true, a / b);
@@ -1443,7 +1421,10 @@ library SafeMath {
      *
      * _Available since v3.4._
      */
-    function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+    function tryMod(
+        uint256 a,
+        uint256 b
+    ) internal pure returns (bool, uint256) {
         unchecked {
             if (b == 0) return (false, 0);
             return (true, a % b);
@@ -1535,7 +1516,11 @@ library SafeMath {
      *
      * - Subtraction cannot overflow.
      */
-    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+    function sub(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
         unchecked {
             require(b <= a, errorMessage);
             return a - b;
@@ -1554,7 +1539,11 @@ library SafeMath {
      *
      * - The divisor cannot be zero.
      */
-    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+    function div(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
         unchecked {
             require(b > 0, errorMessage);
             return a / b;
@@ -1576,7 +1565,11 @@ library SafeMath {
      *
      * - The divisor cannot be zero.
      */
-    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+    function mod(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
         unchecked {
             require(b > 0, errorMessage);
             return a % b;
@@ -1635,11 +1628,10 @@ library Strings {
     /**
      * @dev Converts a `uint256` to its ASCII `string` hexadecimal representation with fixed length.
      */
-    function toHexString(uint256 value, uint256 length)
-        internal
-        pure
-        returns (string memory)
-    {
+    function toHexString(
+        uint256 value,
+        uint256 length
+    ) internal pure returns (string memory) {
         bytes memory buffer = new bytes(2 * length + 2);
         buffer[0] = "0";
         buffer[1] = "x";
@@ -1649,6 +1641,242 @@ library Strings {
         }
         require(value == 0, "Strings: hex length insufficient");
         return string(buffer);
+    }
+}
+// File: @openzeppelin/contracts/token/ERC20/IERC20.sol
+
+pragma solidity ^0.8.0;
+
+/**
+ * @dev Interface of the ERC20 standard as defined in the EIP.
+ */
+interface IERC20 {
+    /**
+     * @dev Returns the amount of tokens in existence.
+     */
+    function totalSupply() external view returns (uint256);
+
+    /**
+     * @dev Returns the amount of tokens owned by `account`.
+     */
+    function balanceOf(address account) external view returns (uint256);
+
+    /**
+     * @dev Moves `amount` tokens from the caller's account to `recipient`.
+     *
+     * Returns a boolean value indicating whether the operation succeeded.
+     *
+     * Emits a {Transfer} event.
+     */
+    function transfer(
+        address recipient,
+        uint256 amount
+    ) external returns (bool);
+
+    /**
+     * @dev Returns the remaining number of tokens that `spender` will be
+     * allowed to spend on behalf of `owner` through {transferFrom}. This is
+     * zero by default.
+     *
+     * This value changes when {approve} or {transferFrom} are called.
+     */
+    function allowance(
+        address owner,
+        address spender
+    ) external view returns (uint256);
+
+    /**
+     * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.
+     *
+     * Returns a boolean value indicating whether the operation succeeded.
+     *
+     * IMPORTANT: Beware that changing an allowance with this method brings the risk
+     * that someone may use both the old and the new allowance by unfortunate
+     * transaction ordering. One possible solution to mitigate this race
+     * condition is to first reduce the spender's allowance to 0 and set the
+     * desired value afterwards:
+     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
+     *
+     * Emits an {Approval} event.
+     */
+    function approve(address spender, uint256 amount) external returns (bool);
+
+    /**
+     * @dev Moves `amount` tokens from `sender` to `recipient` using the
+     * allowance mechanism. `amount` is then deducted from the caller's
+     * allowance.
+     *
+     * Returns a boolean value indicating whether the operation succeeded.
+     *
+     * Emits a {Transfer} event.
+     */
+    function transferFrom(
+        address sender,
+        address recipient,
+        uint256 amount
+    ) external returns (bool);
+
+    /**
+     * @dev Emitted when `value` tokens are moved from one account (`from`) to
+     * another (`to`).
+     *
+     * Note that `value` may be zero.
+     */
+    event Transfer(address indexed from, address indexed to, uint256 value);
+
+    /**
+     * @dev Emitted when the allowance of a `spender` for an `owner` is set by
+     * a call to {approve}. `value` is the new allowance.
+     */
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
+}
+pragma solidity ^0.8.0;
+
+/**
+ * @dev Interface for the optional metadata functions from the ERC20 standard.
+ */
+interface IERC20Metadata is IERC20 {
+    /**
+     * @dev Returns the name of the token.
+     */
+    function name() external view returns (string memory);
+
+    /**
+     * @dev Returns the symbol of the token.
+     */
+    function symbol() external view returns (string memory);
+
+    /**
+     * @dev Returns the decimals places of the token.
+     */
+    function decimals() external view returns (uint8);
+}
+// File: @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+
+pragma solidity ^0.8.0;
+
+/**
+ * @title SafeERC20
+ * @dev Wrappers around ERC20 operations that throw on failure (when the token
+ * contract returns false). Tokens that return no value (and instead revert or
+ * throw on failure) are also supported, non-reverting calls are assumed to be
+ * successful.
+ * To use this library you can add a `using SafeERC20 for IERC20;` statement to your contract,
+ * which allows you to call the safe operations as `token.safeTransfer(...)`, etc.
+ */
+library SafeERC20 {
+    using SafeMath for uint256;
+    using Address for address;
+
+    function safeTransfer(IERC20 token, address to, uint256 value) internal {
+        _callOptionalReturn(
+            token,
+            abi.encodeWithSelector(token.transfer.selector, to, value)
+        );
+    }
+
+    function safeTransferFrom(
+        IERC20 token,
+        address from,
+        address to,
+        uint256 value
+    ) internal {
+        _callOptionalReturn(
+            token,
+            abi.encodeWithSelector(token.transferFrom.selector, from, to, value)
+        );
+    }
+
+    /**
+     * @dev Deprecated. This function has issues similar to the ones found in
+     * {IERC20-approve}, and its usage is discouraged.
+     *
+     * Whenever possible, use {safeIncreaseAllowance} and
+     * {safeDecreaseAllowance} instead.
+     */
+    function safeApprove(
+        IERC20 token,
+        address spender,
+        uint256 value
+    ) internal {
+        // safeApprove should only be called when setting an initial allowance,
+        // or when resetting it to zero. To increase and decrease it, use
+        // 'safeIncreaseAllowance' and 'safeDecreaseAllowance'
+        // solhint-disable-next-line max-line-length
+        require(
+            (value == 0) || (token.allowance(address(this), spender) == 0),
+            "SafeERC20: approve from non-zero to non-zero allowance"
+        );
+        _callOptionalReturn(
+            token,
+            abi.encodeWithSelector(token.approve.selector, spender, value)
+        );
+    }
+
+    function safeIncreaseAllowance(
+        IERC20 token,
+        address spender,
+        uint256 value
+    ) internal {
+        uint256 newAllowance = token.allowance(address(this), spender).add(
+            value
+        );
+        _callOptionalReturn(
+            token,
+            abi.encodeWithSelector(
+                token.approve.selector,
+                spender,
+                newAllowance
+            )
+        );
+    }
+
+    function safeDecreaseAllowance(
+        IERC20 token,
+        address spender,
+        uint256 value
+    ) internal {
+        uint256 newAllowance = token.allowance(address(this), spender).sub(
+            value,
+            "SafeERC20: decreased allowance below zero"
+        );
+        _callOptionalReturn(
+            token,
+            abi.encodeWithSelector(
+                token.approve.selector,
+                spender,
+                newAllowance
+            )
+        );
+    }
+
+    /**
+     * @dev Imitates a Solidity high-level call (i.e. a regular function call to a contract), relaxing the requirement
+     * on the return value: the return value is optional (but if data is returned, it must not be false).
+     * @param token The token targeted by the call.
+     * @param data The call data (encoded using abi.encode or one of its variants).
+     */
+    function _callOptionalReturn(IERC20 token, bytes memory data) private {
+        // We need to perform a low level call here, to bypass Solidity's return data size checking mechanism, since
+        // we're implementing it ourselves. We use {Address.functionCall} to perform this call, which verifies that
+        // the target address contains contract code and also asserts for success in the low-level call.
+
+        bytes memory returndata = address(token).functionCall(
+            data,
+            "SafeERC20: low-level call failed"
+        );
+        if (returndata.length > 0) {
+            // Return data is optional
+            // solhint-disable-next-line max-line-length
+            require(
+                abi.decode(returndata, (bool)),
+                "SafeERC20: ERC20 operation did not succeed"
+            );
+        }
     }
 }
 
@@ -1668,7 +1896,11 @@ contract HeroesBattleArena is
 
     string public name;
     using SafeMath for uint256;
+    using SafeERC20 for IERC20Metadata;
 
+    // Accepting Token
+    IERC20Metadata public ERC20Token;
+    uint256 TokenDecimals = 18;
     mapping(uint256 => PartWithPrice) allParts;
     uint256[] public partIds;
 
@@ -1683,12 +1915,13 @@ contract HeroesBattleArena is
 
     bool reentrancyGuardFlag = false;
 
-    constructor(string memory _url) ERC1155(_url) {
+    constructor(string memory _url , IERC20Metadata _token) ERC1155(_url) {
+        ERC20Token = IERC20Metadata(_token);
         name = "HEROES BATTLE ARENA";
 
-        earlyHeroesSupply = 70000;
-        olympHeroesSupply = 50000;
-        nordHeroesSupply = 30000;
+        earlyHeroesSupply = 5000;
+        olympHeroesSupply = 3000;
+        nordHeroesSupply = 2000;
         freeStonesSupply = 6;
     }
 
@@ -1697,7 +1930,7 @@ contract HeroesBattleArena is
         uint256 id,
         uint256 price,
         string memory herotype
-    ) public onlyAdmin {
+    ) external onlyAdmin  {
         PartWithPrice storage newPart = allParts[id];
         newPart.name = nftName;
         newPart.herotype = herotype;
@@ -1705,16 +1938,14 @@ contract HeroesBattleArena is
         partIds.push(id);
     }
 
-    function getPartById(uint256 id)
-        public
-        view
-        returns (string memory, uint256)
-    {
+    function getPartById(
+        uint256 id
+    ) external view returns (string memory, uint256) {
         PartWithPrice storage s = allParts[id];
         return (s.name, s.price);
     }
 
-    function getPartByName(string memory _name) public view returns (uint256) {
+    function getPartByName(string memory _name) external view returns (uint256) {
         for (uint256 i = 0; i <= partIds.length; i++) {
             PartWithPrice storage s = allParts[i];
             if (
@@ -1731,46 +1962,81 @@ contract HeroesBattleArena is
         _setURI(newuri);
     }
 
-    function mint(string memory _name, uint256 amount) public payable {
+    function mint(string memory _name, uint256 amount) public {
         require(!reentrancyGuardFlag, "Reentrancy Guard Activated");
         reentrancyGuardFlag = true;
-        uint256 resultPrice = uint256(getLatestPrice()); 
-        uint256 coinAmount = msg.value;
+        uint256 resultPrice = uint256(getLatestPrice());
         for (uint256 i = 0; i <= partIds.length; ++i) {
             PartWithPrice storage s = allParts[i];
-            if (keccak256(abi.encodePacked(s.name)) == keccak256(abi.encodePacked(_name))) {
-                uint256 cost =  amount.mul(s.price.mul(10**8)).div(resultPrice);
+            if (
+                keccak256(abi.encodePacked(s.name)) ==
+                keccak256(abi.encodePacked(_name))
+            ) {
                 if (msg.sender != owner()) {
-                        require(cost <= msg.value,"Value sent is not correct");
-                          if (coinAmount > cost) {
-                            address payable refundAccount = payable(msg.sender);
-	                        refundAccount.transfer(coinAmount.sub(cost));
-                            coinAmount = cost;
-                        }
+                    uint256 cost = amount
+                        .mul(s.price.mul(10 ** ERC20Token.decimals()))
+                        .div(resultPrice).div(10 ** 10);
+                    require(
+                        ERC20Token.allowance(msg.sender, address(this)) >= cost,
+                        "HeroesBattleArena: Not enough allowance"
+                    );
+                    require(
+                        ERC20Token.balanceOf(msg.sender) >= cost,
+                        "HeroesBattleArena: Not enough balance"
+                    );
+                    ERC20Token.safeTransferFrom(
+                        msg.sender,
+                        owner(),
+                        cost
+                    );
                 }
-                if (keccak256(abi.encodePacked((s.herotype))) == keccak256(abi.encodePacked(("Free")))) {
-                    require(balanceOf(msg.sender, i) + amount < freeStonesSupply,"You already have maximum free stone.");
+                if (
+                    keccak256(abi.encodePacked((s.herotype))) ==
+                    keccak256(abi.encodePacked(("Free")))
+                ) {
+                    require(
+                        balanceOf(msg.sender, i) + amount < freeStonesSupply,
+                        "You already have maximum free stone."
+                    );
                     _mint(msg.sender, i, amount, "0x0");
                     continue;
-                } else if (keccak256(abi.encodePacked((s.herotype))) == keccak256(abi.encodePacked(("Early"))))  {
-                        require(earlyHeroesNumber.add(amount) <= earlyHeroesSupply,"There is no supply, right now.");
-                        _mint(msg.sender, i, amount, "0x0");
-                        earlyHeroesNumber.add(amount);
-                    } else if (keccak256(abi.encodePacked((s.herotype))) == keccak256(abi.encodePacked(("Olymp")))) {
-                        require(earlyHeroesNumber.add(amount) <= olympHeroesSupply, "There is no supply, right now.");
-                        _mint(msg.sender, i, amount, "0x0");
-                        olympHeroesNumber.add(amount);
-                    } else if (keccak256(abi.encodePacked((s.herotype))) ==keccak256(abi.encodePacked(("North")))) {
-                        require(nordHeroesNumber.add(amount) <= nordHeroesSupply,"There is no supply, right now.");
-                        _mint(msg.sender, i, amount, "0x0");
-                        nordHeroesNumber.add(amount);
-                    } else {
-                        _mint(msg.sender, i, amount, "0x0");
-                    }
+                } else if (
+                    keccak256(abi.encodePacked((s.herotype))) ==
+                    keccak256(abi.encodePacked(("Early")))
+                ) {
+                    require(
+                        earlyHeroesNumber.add(amount) <= earlyHeroesSupply,
+                        "There is no supply, right now."
+                    );
+                    _mint(msg.sender, i, amount, "0x0");
+                    earlyHeroesNumber.add(amount);
+                } else if (
+                    keccak256(abi.encodePacked((s.herotype))) ==
+                    keccak256(abi.encodePacked(("Olymp")))
+                ) {
+                    require(
+                        earlyHeroesNumber.add(amount) <= olympHeroesSupply,
+                        "There is no supply, right now."
+                    );
+                    _mint(msg.sender, i, amount, "0x0");
+                    olympHeroesNumber.add(amount);
+                } else if (
+                    keccak256(abi.encodePacked((s.herotype))) ==
+                    keccak256(abi.encodePacked(("North")))
+                ) {
+                    require(
+                        nordHeroesNumber.add(amount) <= nordHeroesSupply,
+                        "There is no supply, right now."
+                    );
+                    _mint(msg.sender, i, amount, "0x0");
+                    nordHeroesNumber.add(amount);
+                } else {
+                    _mint(msg.sender, i, amount, "0x0");
                 }
             }
-             reentrancyGuardFlag = false;
         }
+        reentrancyGuardFlag = false;
+    }
 
     function changeEarlySupply(uint256 supply) public onlyOwner {
         earlyHeroesSupply = supply;
@@ -1783,7 +2049,10 @@ contract HeroesBattleArena is
     function changeNordSupply(uint256 supply) public onlyOwner {
         nordHeroesSupply = supply;
     }
-
+    
+    function changeTokenAddress(IERC20Metadata _token) public onlyOwner {
+        ERC20Token = IERC20Metadata(_token);
+    }
     function changeFreeSupply(uint256 supply) public onlyOwner {
         freeStonesSupply = supply;
     }
@@ -1791,9 +2060,14 @@ contract HeroesBattleArena is
     function withdrawBalance() public onlyOwner {
         payable(owner()).transfer(address(this).balance);
     }
-    function getEstimatedCoinAmountForMint(uint256 amount , uint256 partId) public view returns (uint256) {
-         uint256 resultPrice = uint256(getLatestPrice()); 
-         PartWithPrice storage s = allParts[partId];
-        return amount.mul(s.price.mul(10**8)).div(resultPrice);
+
+    function getEstimatedCoinAmountForMint(
+        uint256 amount,
+        uint256 partId
+    ) public view returns (uint256) {
+        uint256 resultPrice = uint256(getLatestPrice());
+        PartWithPrice storage s = allParts[partId];
+        return amount.mul(s.price.mul(10 ** ERC20Token.decimals())).div(resultPrice).div(10 ** 10);
     }
+
 }
